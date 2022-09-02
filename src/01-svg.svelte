@@ -1,19 +1,24 @@
 <script></script>
 
-Yes, that's right.
 <svg>
-  <g transform="translate(30, 30) scale(5)">
-    <rect width="90" height="30" fill="green" />
-    <circle r="10" fill="red" stroke="blue" stroke-width="8" />
+  <!-- group tag (g) -->
+  <g transform="translate(20 20)">
+    <circle r="10" fill="red" cx="50%" cy="50%" />
+    <rect width="90" height="30" fill="green" x="40%" y="40%" />
+    <line
+      stroke="black"
+      x1="50%"
+      y1="50%"
+      stroke-width="4"
+      transform="translate(50 50)"
+    />
   </g>
-
-  <line stroke="black" x1="50" y1="80" stroke-width="8" />
 </svg>
 
 <style>
   svg {
-    border: 1px solid red;
+    border: 1px solid black;
     width: 100%;
-    height: 500px;
+    height: 100vh;
   }
 </style>
