@@ -1,7 +1,7 @@
 export interface IrisEntry {
-    petalLength: number;
-    petalWidth: number;
-    sepalLength: number;
-    sepalWidth: number;
-    species: string;
+  sepalLength: number;
+  sepalWidth: number;
+  petalLength: number;
+  petalWidth: number;
+  species: string;
 }
