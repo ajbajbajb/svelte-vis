@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type {IrisEntry} from "./types";
-  import Scatter from "./Scatter.svelte"
+  import type { IrisEntry } from "./types";
+  import Scatter from "./Scatter.svelte";
   import DimensionSelector from "./DimensionSelector.svelte";
 
   async function loadData() {

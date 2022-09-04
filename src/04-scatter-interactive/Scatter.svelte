@@ -4,6 +4,8 @@
   import type { IrisEntry } from "./types";
 
   export let data: IrisEntry[];
+  export let xDimension: string;
+  export let yDimension: string;
 
   const height = 600;
   const width = 600;
@@ -11,9 +13,9 @@
   const axisSpace = 30;
   const colors = ["red", "green", "blue"];
 
-  let xExtent = extent(data, (d) => d.petalLength);
-  let yExtent = extent(data, (d) => d.petalWidth);
-  console.log(xExtent);
+  $: xExtent = extent(data, (d) => d[xDimension]);
+  $: yExtent = extent(data, (d) => d[yDimension]);
+  // console.log(xExtent);
 
   // javascript set that is passed a list of each flower.ƒ
   let species = Array.from(new Set(data.map((d) => d.species)));
@@ -22,20 +24,21 @@
   let colorScale = scaleOrdinal().domain(species).range(colors);
   // construct the scale by interpolating between the two values identified in the extent
   // and then restrict them to the range of the available width or height.
-  let xScale = scaleLinear()
+  $: xScale = scaleLinear()
     .domain(xExtent)
     .range([buffer + axisSpace, width - buffer - axisSpace]);
-  let yScale = scaleLinear()
+  $: yScale = scaleLinear()
     .domain(yExtent)
     .range([height - buffer - axisSpace, buffer + axisSpace]);
 </script>
 
-<svg {height} {width}>
+<svg {height} {width} transition="transform 0.4s">
   {#each data as item}
     <circle
       r="3"
-      cx={xScale(item.petalLength)}
-      cy={yScale(item.petalWidth)}
+      transform={`translate(${xScale(item[xDimension])} ${yScale(
+        item[yDimension]
+      )})`}
       fill={colorScale(item.species)}
     />
   {/each}
@@ -60,3 +63,10 @@
     {/each}
   </g>
 </svg>
+
+<!-- use css animations to animate transitions -->
+<style>
+  svg {
+    transition: transform 0.4s;
+  }
+</style>
